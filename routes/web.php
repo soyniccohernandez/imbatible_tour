@@ -3,8 +3,19 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+
 Route::get('/', function () {
-    return view('welcome');
+    $slides = [
+        ['src' => asset('storage/3.webp'), 'alt' => 'Banner 1', 'title' => 'Bienvenido'],
+        ['src' => asset('storage/2.webp'), 'alt' => 'Banner 2', 'title' => 'Producto'],
+    ];
+
+    return view('welcome', compact('slides'));
 });
 
 Route::get('/dashboard', function () {
@@ -17,4 +28,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
