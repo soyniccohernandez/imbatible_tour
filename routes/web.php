@@ -11,12 +11,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $slides = [
-        ['src' => asset('storage/3.webp'), 'alt' => 'Banner 1', 'title' => 'Bienvenido'],
-        ['src' => asset('storage/2.webp'), 'alt' => 'Banner 2', 'title' => 'Producto'],
+        ['src' => asset('storage/1.webp'), 'alt' => 'Banner 1'],
+        ['src' => asset('storage/2.webp'), 'alt' => 'Banner 2'],
+        ['src' => asset('storage/3.webp'), 'alt' => 'Banner 2'],
+        ['src' => asset('storage/4.webp'), 'alt' => 'Banner 2']
     ];
 
     return view('welcome', compact('slides'));
 });
+
+Route::view('/politica-de-privacidad', 'politica')->name('politica');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
