@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Política de Privacidad - Reto Imbatible</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <title>El Cruce de la Cordillera 2025 | 4 etapas con Santiago Buitrago</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- CSS de Splide -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
@@ -29,7 +31,7 @@
 
             <!-- Logos derecha -->
             <div class="flex items-center space-x-5">
-                <a href="https://instagram.com/retoimbatible" target="_blank" rel="noopener">
+                <a href="https://www.instagram.com/imbatible__/" target="_blank" rel="noopener">
                     <img src="/assets/logo_instagram.svg" alt="Instagram" class="h-8 w-8">
                 </a>
                 <a href="https://wa.me/573213028666" target="_blank" rel="noopener">

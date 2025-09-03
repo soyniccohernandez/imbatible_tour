@@ -3,9 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\InteresadoController;
+use App\Exports\InteresadosExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
 
 
 
@@ -21,6 +26,15 @@ Route::get('/', function () {
 });
 
 Route::view('/politica-de-privacidad', 'politica')->name('politica');
+
+Route::get('/interesados', [InteresadoController::class, 'index'])->name('interesados.index');
+Route::post('/interesados', [InteresadoController::class, 'store'])->name('interesados.store');
+
+Route::get('/interesados/export', function () {
+    return Excel::download(new InteresadosExport, 'interesados.xlsx');
+})->name('interesados.export');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

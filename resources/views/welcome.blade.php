@@ -3,10 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Carrusel Simple</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <title>El Cruce de la Cordillera 2025 | 4 etapas con Santiago Buitrago</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- CSS de Splide -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+
 
 
 
@@ -22,7 +25,6 @@
     <style>
         body {
             font-family: "Montserrat", sans-serif;
-
         }
 
         .splide__slide img {
@@ -194,11 +196,11 @@
 
                 <!-- Logos derecha -->
                 <div class="flex items-center space-x-5">
-                    <a href="https://instagram.com" target="_blank" rel="noopener">
-                        <img src="/assets/logo_instagram.svg" alt="Instagram" class="h-10 w-10">
+                    <a href="https://www.instagram.com/imbatible__/" target="_blank" rel="noopener">
+                        <img src="/assets/logo_instagram.svg" alt="Instagram" class="h-8 w-8">
                     </a>
-                    <a href="https://wa.me/573000000000" target="_blank" rel="noopener">
-                        <img src="/assets/logo_whatsapp.svg" alt="WhatsApp" class="h-10 w-10">
+                    <a href="https://wa.me/573213028666" target="_blank" rel="noopener">
+                        <img src="/assets/logo_whatsapp.svg" alt="WhatsApp" class="h-8 w-8">
                     </a>
                 </div>
 
@@ -271,55 +273,65 @@
                     <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center mt-5">
                         ¿Quieres más información?
                     </h3>
-                    <form action="#" method="POST" class="space-y-5">
+                    <form id="formInteresados" action="{{ route('interesados.store') }}" method="POST"
+                        class="space-y-5">
+                        @csrf
                         <!-- Nombre -->
                         <div>
                             <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" required
+                            <input type="text" id="nombre" name="nombre"
                                 class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm px-4 py-2 
-             focus:border-[#C2270E] focus:ring-[#C2270E] sm:text-sm"
+                   focus:border-[#C2270E] focus:ring-[#C2270E] sm:text-sm"
                                 placeholder="Tu nombre completo">
+                            <span class="text-red-600 text-sm mt-1 block" id="error-nombre"></span>
                         </div>
 
                         <!-- Teléfono -->
                         <div>
                             <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                            <input type="tel" id="telefono" name="telefono" required
+                            <input type="tel" id="telefono" name="telefono" pattern="[0-9+ ]{7,15}"
                                 class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm px-4 py-2 
-             focus:border-[#C2270E] focus:ring-[#C2270E] sm:text-sm"
+                   focus:border-[#C2270E] focus:ring-[#C2270E] sm:text-sm"
                                 placeholder="+57 300 000 0000">
+                            <span class="text-red-600 text-sm mt-1 block" id="error-telefono"></span>
                         </div>
 
                         <!-- Correo -->
                         <div>
-                            <label for="correo" class="block text-sm font-medium text-gray-700">
-                                Correo electrónico
-                            </label>
-                            <input type="email" id="correo" name="correo" required
+                            <label for="correo" class="block text-sm font-medium text-gray-700">Correo
+                                electrónico</label>
+                            <input type="email" id="correo" name="correo"
                                 class="mt-1 block w-full rounded-xl border-gray-300 shadow-sm px-4 py-2 
-             focus:border-[#C2270E] focus:ring-[#C2270E] sm:text-sm"
+                   focus:border-[#C2270E] focus:ring-[#C2270E] sm:text-sm"
                                 placeholder="ejemplo@correo.com">
+                            <span class="text-red-600 text-sm mt-1 block" id="error-correo"></span>
                         </div>
 
                         <!-- Check consentimiento -->
                         <div class="flex items-start">
-                            <input id="acepto" name="acepto" type="checkbox" required
+                            <input id="autorizaContacto" name="autorizaContacto" type="checkbox" value="1"
                                 class="h-4 w-4 text-[#C2270E] border-gray-300 rounded focus:ring-[#C2270E]">
-                            <label for="acepto" class="ml-2 text-sm text-gray-600">
+                            <label for="autorizaContacto" class="ml-2 text-sm text-gray-600">
                                 Autorizo ser contactado(a) para recibir información relacionada con
                                 <span class="font-semibold text-gray-800">El cruce de la cordillera</span>.
                             </label>
                         </div>
+                        <span class="text-red-600 text-sm mt-1 block" id="error-autorizaContacto"></span>
 
                         <!-- Botón -->
                         <div>
-                            <button type="submit"
+                            <button type="submit" id="submitBtn"
                                 class="w-full bg-[#C2270E] text-white py-3 font-medium shadow 
-             hover:bg-red-700 transition rounded-none clip-path-inverted">
+                   hover:bg-red-700 transition rounded-none clip-path-inverted">
                                 Enviar
                             </button>
                         </div>
                     </form>
+
+                    <!-- Mensaje final -->
+                    <div id="mensajeFinal" class="hidden mt-4 p-4 rounded-lg text-white bg-green-600 text-center">
+                    </div>
+
 
                 </div>
             </div>
@@ -349,7 +361,7 @@
     </div>
 
 
-    <footer class="max-w-7xl mx-auto">
+    <footer class="max-w-7xl mx-auto mb-5">
         <div class="flex justify-center items-center gap-16">
 
             <!-- SVG izquierda -->
@@ -370,6 +382,46 @@
 
         </div>
     </footer>
+
+    <!-- Aquí pondremos el mensaje -->
+    <div id="alerta" class="hidden p-4 mb-4 rounded-lg"></div>
+
+    <div id="toast"
+        class="fixed top-5 right-5 transform translate-y-[-150%] transition-all duration-500 ease-in-out
+           bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hidden z-50">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Modal Agradecimiento -->
+    <div id="modalGracias" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 text-center relative">
+
+            <!-- Botón Cerrar -->
+            <button onclick="cerrarModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+                ✖
+            </button>
+
+            <!-- Icono -->
+            <div class="flex justify-center mb-4">
+                <img src="/assets/logo_dark.svg" alt="Evento" class="h-16 w-auto">
+            </div>
+
+            <!-- Mensaje -->
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">¡Gracias por registrarte!</h2>
+            <p class="text-gray-600 mb-6">
+                🚴‍♂️ Muy pronto recibirás más información sobre el <strong>Cruce de la Cordillera</strong>.
+                Estamos felices de que seas parte de este gran reto.
+            </p>
+
+            <!-- Botón acción -->
+            <button onclick="cerrarModal()"
+                class="w-full bg-[#C2270E] text-white py-3 font-medium shadow 
+         hover:bg-red-700 transition rounded-none clip-path-inverted">
+                Entendido
+            </button>
+        </div>
+    </div>
+
 
 
     <!-- JS Carrusel -->
@@ -441,8 +493,106 @@
         }
 
 
-       
+
+        function abrirModal() {
+            document.getElementById("modalGracias").classList.remove("hidden");
+        }
+
+        function cerrarModal() {
+            document.getElementById("modalGracias").classList.add("hidden");
+        }
+
+        // Manejando envio y respeusta del servidor
+        document.getElementById('formInteresados').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            // Limpiar errores previos
+            ['nombre', 'telefono', 'correo', 'autorizaContacto'].forEach(campo => {
+                document.getElementById(`error-${campo}`).textContent = '';
+            });
+
+            let valido = true;
+
+            // Validaciones
+            if (!formData.get('nombre')) {
+                document.getElementById('error-nombre').textContent = 'El nombre es obligatorio';
+                valido = false;
+            }
+            if (!formData.get('telefono')) {
+                document.getElementById('error-telefono').textContent = 'El teléfono es obligatorio';
+                valido = false;
+            }
+            if (!formData.get('correo')) {
+                document.getElementById('error-correo').textContent = 'El correo es obligatorio';
+                valido = false;
+            }
+            if (!formData.get('autorizaContacto')) {
+                document.getElementById('error-autorizaContacto').textContent = 'Debes autorizar el contacto';
+                valido = false;
+            }
+
+            if (!valido) return;
+
+            // Botón -> loader
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<svg class="animate-spin h-5 w-5 mx-auto text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+    </svg>`;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                        'Accept': 'application/json',
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Simular espera de 3s con loader
+                    setTimeout(() => {
+                        form.reset();
+
+                        // Restaurar botón
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "Enviar";
+
+                        // Abrir modal en vez de toastr
+                        abrirModal();
+                    }, 3000);
+
+                } else {
+                    const errorData = await response.json();
+                    if (errorData.errors) {
+                        for (const campo in errorData.errors) {
+                            document.getElementById(`error-${campo}`).textContent = errorData.errors[campo][0];
+                        }
+                    } else {
+                        showToast("Ocurrió un error inesperado. Intenta de nuevo.", "error");
+                    }
+
+                    // Restaurar botón si error
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Enviar";
+                }
+            } catch (error) {
+                console.error("Error en el envío:", error);
+                showToast("Error de conexión con el servidor.", "error");
+
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Enviar";
+            }
+        });
     </script>
+
 
 </body>
 
